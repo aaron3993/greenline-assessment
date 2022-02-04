@@ -1,6 +1,7 @@
 const express = require("express");
 const companyRoutes = require("./routes/companies");
 const userRoutes = require("./routes/users");
+const productRoutes = require("./routes/products");
 
 const db = require("./config/database");
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.get("/", (req, res) => res.send("Home page"));
 app.use("/companies", companyRoutes);
 app.use("/users", userRoutes);
+app.use("/products", productRoutes);
 
 const PORT = process.env.PORT || 8080;
 
