@@ -12,10 +12,5 @@ ProductSale.belongsTo(Sale, {
   foreignKey: "saleId",
   as: "sale",
 });
-// Sale.hasOne(User, { as: "users" });
-// User.belongsTo(Sale, {
-//   foreignKey: "userId",
-//   as: "user",
-// });
 
 module.exports = Sale;

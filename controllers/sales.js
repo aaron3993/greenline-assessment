@@ -1,3 +1,4 @@
+const Product = require("../models/Product");
 const ProductSale = require("../models/Product-Sale");
 const Sale = require("../models/Sale");
 
@@ -12,27 +13,24 @@ exports.getSales = async (req, res) => {
 
 exports.createSale = async (req, res) => {
   try {
-    // products = [
-    //   {
-    //     productId: 1,
-    //     quantity: 2
-    //   }
-    // ]
-
     const sale = await Sale.create({
-      user: req.body.userId,
+      userId: req.body.userId,
     });
+    const productSales = [];
+    let totalAmount = 0;
     for (const product of req.body.products) {
-      await ProductSale.create({
+      const productObj = await Product.findByPk(product.productId);
+      totalAmount += productObj.price * product.quantity;
+      const newProductSale = await ProductSale.create({
         productId: product.productId,
         quantity: product.quantity,
+        saleId: sale.id,
       });
-      sale.productSales.push(productId);
+      sale.total = totalAmount;
       await sale.save();
+      productSales.push(newProductSale);
     }
-
-    // also create a product-sale for each item bought
-    res.status(200).send(sale);
+    res.status(200).send({ sale, productSales });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
