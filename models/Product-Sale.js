@@ -3,7 +3,9 @@ const db = require("../config/database");
 const Product = require("./Product");
 const User = require("./User");
 
-const ProductSale = db.define("sale", {});
+const ProductSale = db.define("sale", {
+  quantity: Sequelize.NUMBER,
+});
 
 ProductSale.hasOne(Product, { as: "product" });
 Product.belongsTo(ProductSale, {
