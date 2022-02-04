@@ -14,7 +14,7 @@ module.exports = {
       },
       price: {
         allowNull: false,
-        type: Sequelize.NUMBER,
+        type: Sequelize.DECIMAL,
       },
       companyId: {
         type: Sequelize.INTEGER,
