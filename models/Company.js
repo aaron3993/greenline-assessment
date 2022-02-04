@@ -8,12 +8,12 @@ const Company = db.define("company", {
 });
 
 Company.hasMany(User, { as: "users" });
-Company.hasMany(Product, { as: "products" });
-Product.belongsTo(Company, {
+User.belongsTo(Company, {
   foreignKey: "companyId",
   as: "company",
 });
-User.belongsTo(Company, {
+Company.hasMany(Product, { as: "products" });
+Product.belongsTo(Company, {
   foreignKey: "companyId",
   as: "company",
 });

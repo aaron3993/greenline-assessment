@@ -9,13 +9,13 @@ const Sale = db.define("sale", {
 
 Sale.hasMany(ProductSale, { as: "productSales" });
 ProductSale.belongsTo(Sale, {
-  foreignKey: "productSaleId",
-  as: "product",
+  foreignKey: "saleId",
+  as: "sale",
 });
-Sale.hasOne(User, { as: "user" });
-User.belongsTo(Sale, {
-  foreignKey: "userId",
-  as: "user",
-});
+// Sale.hasOne(User, { as: "users" });
+// User.belongsTo(Sale, {
+//   foreignKey: "userId",
+//   as: "user",
+// });
 
 module.exports = Sale;

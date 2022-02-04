@@ -2,7 +2,7 @@ const express = require("express");
 const companyRoutes = require("./routes/companies");
 const userRoutes = require("./routes/users");
 const productRoutes = require("./routes/products");
-// const saleRoutes = require("./routes/sales");
+const saleRoutes = require("./routes/sales");
 
 const db = require("./config/database");
 
@@ -18,7 +18,7 @@ app.get("/", (req, res) => res.send("Home page"));
 app.use("/companies", companyRoutes);
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
-// app.use("/sales", saleRoutes);
+app.use("/sales", saleRoutes);
 
 const PORT = process.env.PORT || 8080;
 
