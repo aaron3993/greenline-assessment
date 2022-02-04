@@ -13,12 +13,13 @@ exports.getSales = async (req, res) => {
 
 exports.createSale = async (req, res) => {
   try {
+    const { userId, products } = req.body;
     const sale = await Sale.create({
-      userId: req.body.userId,
+      userId,
     });
     const productSales = [];
     let totalAmount = 0;
-    for (const product of req.body.products) {
+    for (const product of products) {
       const productObj = await Product.findByPk(product.productId);
       totalAmount += productObj.price * product.quantity;
       const newProductSale = await ProductSale.create({

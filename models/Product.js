@@ -7,10 +7,4 @@ const Product = db.define("product", {
   price: Sequelize.NUMBER,
 });
 
-// Product.hasMany(ProductSale, { as: "productSales" });
-// ProductSale.belongsTo(Product, {
-//   foreignKey: "productId",
-//   as: "product",
-// });
-
 module.exports = Product;
