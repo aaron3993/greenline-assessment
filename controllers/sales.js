@@ -21,10 +21,8 @@ exports.getTotalSalesByCompany = async (req, res) => {
     const userIds = users.map((user) => user.id);
     const sales = await Sale.findAll({ where: { userId: userIds } });
     let total = 0;
-    if (sales.length === 1) {
-      total = Number(sales[0].total);
-    } else {
-      total = sales.reduce((a, b) => Number(a.total) + Number(b.total));
+    for (const sale of sales) {
+      total += Number(sale.total);
     }
     res.status(200).json(total);
   } catch (err) {
