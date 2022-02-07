@@ -20,7 +20,12 @@ exports.getTotalSalesByCompany = async (req, res) => {
     const users = await User.findAll({ where: { companyId } });
     const userIds = users.map((user) => user.id);
     const sales = await Sale.findAll({ where: { userId: userIds } });
-    const total = sales.reduce((a, b) => Number(a.total) + Number(b.total));
+    let total = 0;
+    if (sales.length === 1) {
+      total = Number(sales[0].total);
+    } else {
+      total = sales.reduce((a, b) => Number(a.total) + Number(b.total));
+    }
     res.status(200).json(total);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -30,6 +35,15 @@ exports.getTotalSalesByCompany = async (req, res) => {
 exports.createSale = async (req, res) => {
   try {
     const { userId, products } = req.body;
+    const user = await User.findByPk(userId);
+    for (const product of products) {
+      const productObj = await Product.findByPk(product.productId);
+      if (productObj.companyId !== user.companyId) {
+        res
+          .status(404)
+          .json("User and products do not belong to the same company");
+      }
+    }
     const sale = await Sale.create({
       userId,
     });
