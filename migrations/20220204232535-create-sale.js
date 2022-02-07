@@ -9,7 +9,6 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       total: {
-        allowNull: false,
         type: Sequelize.DECIMAL,
       },
       userId: {

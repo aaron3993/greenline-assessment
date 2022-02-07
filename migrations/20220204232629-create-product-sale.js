@@ -12,6 +12,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      saleId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "sales",
+          key: "id",
+        },
+      },
       productId: {
         type: Sequelize.INTEGER,
         allowNull: false,
