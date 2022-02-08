@@ -15,7 +15,6 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => res.send("Home page"));
 app.use("/companies", companyRoutes);
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
