@@ -34,10 +34,13 @@ exports.createSale = async (req, res) => {
   try {
     const { userId, products } = req.body;
     const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json("No user found with this ID!");
+    }
     for (const product of products) {
       const productObj = await Product.findByPk(product.productId);
       if (productObj.companyId !== user.companyId) {
-        res
+        return res
           .status(404)
           .json("User and products do not belong to the same company");
       }
